@@ -710,7 +710,7 @@ footer {
 
 /* Section backgrounds */
 section:nth-child(even) {
-  background: var(--muted);
+  background: linear-gradient(to bottom, #ffbf00, #fde59f);
 }
 
 /* Text centering for sections */

@@ -1,5 +1,6 @@
 <!doctype html>
 <html lang="en">
+
 <head>
   <meta charset="utf-8" />
   <title>The CI/CD Fast-Track • Turn-Key GitHub Actions for AWS</title>
@@ -8,6 +9,7 @@
   <link rel="canonical" href="https://bigmangotree.github.io/index.html" />
   <link rel="stylesheet" href="styles/main.css" />
 </head>
+
 <body>
   <!-- Navigation -->
   <nav>
@@ -25,6 +27,11 @@
         <li><a href="#faq">FAQ</a></li>
         <li><a href="#who">About</a></li>
         <li><a href="#support">Support</a></li>
+        <li>
+          <button class="theme-toggle" onclick="toggleTheme()" title="Toggle dark mode" aria-label="Toggle dark mode">
+            <span id="theme-icon">🌙</span>
+          </button>
+        </li>
       </ul>
     </div>
   </nav>
@@ -36,14 +43,18 @@
         <div class="hero-text">
           <span class="pill">BigMangoTree</span>
           <h1>The CI/CD Fast-Track: Turn-Key GitHub Actions for AWS</h1>
-          <p class="hero-description">From <code>git push</code> to AWS in minutes – No YAML wrestling. Ship today; polish later.</p>
+          <p class="hero-description">From <code>git push</code> to AWS in minutes – No YAML wrestling. Ship today;
+            polish later.</p>
           <div class="hero-buttons">
-            <a class="btn btn-primary" href="GUMROAD_20_FLASK?utm_source=site&utm_medium=hero&utm_campaign=launch_v1&utm_content=flask20">Buy $20 Flask</a>
+            <a class="btn btn-primary"
+              href="GUMROAD_20_FLASK?utm_source=site&utm_medium=hero&utm_campaign=launch_v1&utm_content=flask20">Buy $20
+              Flask</a>
             <a class="btn btn-secondary" href="#variants">See all variants</a>
           </div>
           <p style="color: var(--muted-foreground); font-size: var(--text-sm);">
             Checksum included • Community support • 7-day refund (Quickstart + logs)
-            <sup style="cursor: pointer; color: var(--destructive); font-weight: var(--font-weight-medium);" data-modal-open="#refund-modal">*</sup>
+            <sup style="cursor: pointer; color: var(--destructive); font-weight: var(--font-weight-medium);"
+              data-modal-open="#refund-modal">*</sup>
           </p>
         </div>
         <div class="hero-visual">
@@ -137,7 +148,9 @@
               <li>Static site → Nginx on Lightsail/EC2</li>
               <li>Push-to-deploy workflow + Quickstart</li>
             </ul>
-            <a class="btn btn-primary" href="GUMROAD_20_HTML?utm_source=site&utm_medium=variants&utm_campaign=launch_v1&utm_content=html20">Buy $20 HTML</a>
+            <a class="btn btn-primary"
+              href="GUMROAD_20_HTML?utm_source=site&utm_medium=variants&utm_campaign=launch_v1&utm_content=html20">Buy
+              $20 HTML</a>
           </div>
         </div>
 
@@ -149,7 +162,9 @@
               <li>Flask demo → EC2 with Gunicorn + Nginx</li>
               <li>Push-to-deploy workflow + Quickstart</li>
             </ul>
-            <a class="btn btn-primary" href="GUMROAD_20_FLASK?utm_source=site&utm_medium=variants&utm_campaign=launch_v1&utm_content=flask20">Buy $20 Flask</a>
+            <a class="btn btn-primary"
+              href="GUMROAD_20_FLASK?utm_source=site&utm_medium=variants&utm_campaign=launch_v1&utm_content=flask20">Buy
+              $20 Flask</a>
           </div>
         </div>
 
@@ -161,7 +176,9 @@
               <li>Multi-env Terraform (Dev auto; Staging/Prod manual)</li>
               <li>Destroy workflow + CI caching</li>
             </ul>
-            <a class="btn btn-primary" href="GUMROAD_50_HTML?utm_source=site&utm_medium=variants&utm_campaign=launch_v1&utm_content=html50">Buy $50 HTML</a>
+            <a class="btn btn-primary"
+              href="GUMROAD_50_HTML?utm_source=site&utm_medium=variants&utm_campaign=launch_v1&utm_content=html50">Buy
+              $50 HTML</a>
           </div>
         </div>
 
@@ -173,7 +190,9 @@
               <li>Multi-env Terraform (Dev auto; Staging/Prod manual)</li>
               <li>Dockerized build + promotion scripts</li>
             </ul>
-            <a class="btn btn-primary" href="GUMROAD_50_FLASK?utm_source=site&utm_medium=variants&utm_campaign=launch_v1&utm_content=flask50">Buy $50 Flask</a>
+            <a class="btn btn-primary"
+              href="GUMROAD_50_FLASK?utm_source=site&utm_medium=variants&utm_campaign=launch_v1&utm_content=flask50">Buy
+              $50 Flask</a>
           </div>
         </div>
       </div>
@@ -256,9 +275,7 @@
         <h2>Watch it ship (2 minutes)</h2>
       </div>
       <div style="position: relative; padding-top: 56.25%; margin-top: 2rem;">
-        <iframe 
-          src="https://www.youtube.com/embed/VIDEO_ID"
-          title="BigMangoTree CI/CD Fast-Track Demo"
+        <iframe src="https://www.youtube.com/embed/VIDEO_ID" title="BigMangoTree CI/CD Fast-Track Demo"
           style="position: absolute; top: 0; left: 0; width: 100%; height: 100%; border: 0; border-radius: var(--radius);"
           allowfullscreen>
         </iframe>
@@ -279,35 +296,41 @@
         <details class="faq-item">
           <summary>What's the difference between $20 and $50?</summary>
           <div class="faq-content">
-            <p>$20 = single-env push-to-deploy (HTML or Flask). $50 = multi-env (Dev auto + manual Staging/Prod), Terraform guardrails, destroy workflow, caching. Flask Pro adds Docker build + promotion scripts.</p>
+            <p>$20 = single-env push-to-deploy (HTML or Flask). $50 = multi-env (Dev auto + manual Staging/Prod),
+              Terraform guardrails, destroy workflow, caching. Flask Pro adds Docker build + promotion scripts.</p>
           </div>
         </details>
 
         <details class="faq-item">
           <summary>Can I upgrade from $20 to $50 later?</summary>
           <div class="faq-content">
-            <p>Yes. Replace the $20 workflows with the $50 set and follow the Quickstart. Your infra state can stay; you mainly swap CI steps (test on a new branch first).</p>
+            <p>Yes. Replace the $20 workflows with the $50 set and follow the Quickstart. Your infra state can stay; you
+              mainly swap CI steps (test on a new branch first).</p>
           </div>
         </details>
 
         <details class="faq-item">
           <summary>Can I customize it?</summary>
           <div class="faq-content">
-            <p>Absolutely. You're licensed to modify for your own projects: edit variables (region, instance type), add steps (linters/tests), swap AMIs, or extend the pipeline.</p>
+            <p>Absolutely. You're licensed to modify for your own projects: edit variables (region, instance type), add
+              steps (linters/tests), swap AMIs, or extend the pipeline.</p>
           </div>
         </details>
 
         <details class="faq-item">
           <summary>What's the support model?</summary>
           <div class="faq-content">
-            <p>Community support only. If AWS/GitHub changes break a script, open a GitHub Issue with logs—we'll patch. No 1:1 consulting or SLAs included.</p>
+            <p>Community support only. If AWS/GitHub changes break a script, open a GitHub Issue with logs—we'll patch.
+              No 1:1 consulting or SLAs included.</p>
           </div>
         </details>
 
         <details class="faq-item">
           <summary>Refunds?</summary>
           <div class="faq-content">
-            <p>We want you to succeed. If you can't complete the Quickstart within 7 days and share relevant logs/errors, you qualify for a refund. <a href="#" data-modal-open="#refund-modal">Read full Refund Policy →</a></p>
+            <p>We want you to succeed. If you can't complete the Quickstart within 7 days and share relevant
+              logs/errors, you qualify for a refund. <a href="#" data-modal-open="#refund-modal">Read full Refund Policy
+                →</a></p>
           </div>
         </details>
 
@@ -325,13 +348,15 @@
         <details class="faq-item">
           <summary>What does the license allow?</summary>
           <div class="faq-content">
-            <p>You can use and modify internally for your projects/teams. Redistribution/resale is not permitted. See LICENSE.md for full terms.</p>
+            <p>You can use and modify internally for your projects/teams. Redistribution/resale is not permitted. See
+              LICENSE.md for full terms.</p>
           </div>
         </details>
       </div>
 
       <p style="text-align: center; margin-top: 2rem; color: var(--muted-foreground); font-size: var(--text-sm);">
-        Want the full list? <a href="https://github.com/BigMangoTree/faq.md" target="_blank" rel="noopener">View all FAQs on GitHub</a>
+        Want the full list? <a href="https://github.com/BigMangoTree/faq.md" target="_blank" rel="noopener">View all
+          FAQs on GitHub</a>
       </p>
     </div>
   </section>
@@ -344,7 +369,8 @@
       </div>
       <div style="max-width: 800px; margin: 0 auto; text-align: center;">
         <p style="font-size: var(--text-lg); margin-bottom: 2rem; color: var(--muted-foreground);">
-          We're <strong style="color: var(--foreground);">BigMangoTree</strong> — indie builders who love turning infrastructure headaches into clean, repeatable pipelines. 
+          We're <strong style="color: var(--foreground);">BigMangoTree</strong> — indie builders who love turning
+          infrastructure headaches into clean, repeatable pipelines.
           We ship pragmatic tools that save time now and stay hackable later.
         </p>
         <div class="cards-grid" style="text-align: left;">
@@ -362,7 +388,8 @@
           </div>
         </div>
         <p style="margin-top: 2rem; color: var(--muted-foreground);">
-          Got ideas or feedback? We welcome suggestions — <a href="https://github.com/YOUR_REPO/feature-requests" target="_blank" rel="noopener">open a feature request</a>.
+          Got ideas or feedback? We welcome suggestions — <a href="https://github.com/YOUR_REPO/feature-requests"
+            target="_blank" rel="noopener">open a feature request</a>.
         </p>
       </div>
     </div>
@@ -398,13 +425,13 @@
         </p>
         <a class="btn btn-primary" href="#variants">See All 4 Turn-Key Solution Options</a>
       </div>
-      
+
       <div class="footer-links">
         <a href="#" data-modal-open="#privacy-modal">Privacy Policy</a>
         <span style="color: var(--muted-foreground);">•</span>
         <span style="color: var(--muted-foreground);">Not affiliated with AWS or GitHub</span>
       </div>
-      
+
       <p style="color: var(--muted-foreground); font-size: var(--text-sm); margin-top: 1rem;">
         © BigMangoTree
       </p>
@@ -416,19 +443,31 @@
     <div class="modal-dialog" role="document">
       <button class="modal-close" data-modal-close aria-label="Close">✕</button>
       <h3 id="privacy-title">Privacy Policy</h3>
-      <div style="color: var(--muted-foreground); font-size: var(--text-sm); margin-bottom: 1.5rem;">Effective: 20 Aug 2025</div>
+      <div style="color: var(--muted-foreground); font-size: var(--text-sm); margin-bottom: 1.5rem;">Effective: 20 Aug
+        2025</div>
 
       <div class="modal-content">
-        <p>This site (<strong>bigmangotree.github.io</strong>) is a static website with no backend or user accounts. We don't collect personal details such as names, emails, or payment information here.</p>
-        
-        <p>We do use <strong>Google Analytics</strong> to measure general traffic patterns (for example: page views, referral sources, device/browser type). This helps us understand how the site is used and improve it over time.</p>
-        
-        <p>Data collected through Google Analytics is processed by Google and may include your IP address. We don't sell or share this data with anyone else. You can learn more in <a href="https://policies.google.com/privacy" target="_blank" rel="noopener">Google's Privacy Policy</a> or opt out via the <a href="https://tools.google.com/dlpage/gaoptout" target="_blank" rel="noopener">Google Analytics Opt-Out</a> tool.</p>
-        
-        <p><strong>Payments & downloads:</strong> Purchases and file delivery are handled by <em>Gumroad</em>. Any information you provide at checkout is processed under <em>Gumroad's</em> terms and privacy policy. We do not receive your full payment details.</p>
-        
-        <p><strong>Support:</strong> If you open a ticket on <em>GitHub Issues</em>, your post (including any logs you share) is public on GitHub. If you email us, we only use your message to reply and provide support; we do not sell, rent, or share it with third parties.</p>
-        
+        <p>This site (<strong>bigmangotree.github.io</strong>) is a static website with no backend or user accounts. We
+          don't collect personal details such as names, emails, or payment information here.</p>
+
+        <p>We do use <strong>Google Analytics</strong> to measure general traffic patterns (for example: page views,
+          referral sources, device/browser type). This helps us understand how the site is used and improve it over
+          time.</p>
+
+        <p>Data collected through Google Analytics is processed by Google and may include your IP address. We don't sell
+          or share this data with anyone else. You can learn more in <a href="https://policies.google.com/privacy"
+            target="_blank" rel="noopener">Google's Privacy Policy</a> or opt out via the <a
+            href="https://tools.google.com/dlpage/gaoptout" target="_blank" rel="noopener">Google Analytics Opt-Out</a>
+          tool.</p>
+
+        <p><strong>Payments & downloads:</strong> Purchases and file delivery are handled by <em>Gumroad</em>. Any
+          information you provide at checkout is processed under <em>Gumroad's</em> terms and privacy policy. We do not
+          receive your full payment details.</p>
+
+        <p><strong>Support:</strong> If you open a ticket on <em>GitHub Issues</em>, your post (including any logs you
+          share) is public on GitHub. If you email us, we only use your message to reply and provide support; we do not
+          sell, rent, or share it with third parties.</p>
+
         <p style="color: var(--muted-foreground); font-size: var(--text-sm); margin-top: 1.5rem;">
           Questions? Contact: <a href="mailto:support@yourdomain.com">support@yourdomain.com</a>
         </p>
@@ -446,16 +485,19 @@
       </div>
 
       <div class="modal-content">
-        <p><strong>Window:</strong> Refunds are available within <strong>7 calendar days</strong> of purchase (based on the Gumroad receipt timestamp).</p>
+        <p><strong>Window:</strong> Refunds are available within <strong>7 calendar days</strong> of purchase (based on
+          the Gumroad receipt timestamp).</p>
 
-        <p><strong>Eligibility:</strong> Refunds apply only if you are <em>unable to complete the documented Quickstart</em> after following the steps as written and using supported platforms/versions.</p>
+        <p><strong>Eligibility:</strong> Refunds apply only if you are <em>unable to complete the documented
+            Quickstart</em> after following the steps as written and using supported platforms/versions.</p>
 
         <p><strong>What to include:</strong> To request a refund, provide:</p>
         <ul>
           <li>Gumroad <strong>order ID</strong> and purchaser email</li>
           <li><strong>SKU/variant</strong> (e.g., $20 HTML / $50 Flask)</li>
           <li><strong>Environment details:</strong> AWS region, Terraform version, GitHub runner OS</li>
-          <li>Link to the <strong>failing GitHub Actions run</strong> and relevant <strong>logs/screenshots</strong> (no secrets)</li>
+          <li>Link to the <strong>failing GitHub Actions run</strong> and relevant <strong>logs/screenshots</strong> (no
+            secrets)</li>
           <li><strong>Checksum verification</strong> confirming your ZIP matches <code>checksums.txt</code></li>
         </ul>
 
@@ -467,7 +509,9 @@
           <li>Buyer's remorse, cost concerns, or incompatibility with unsupported stacks</li>
         </ul>
 
-        <p><strong>Process:</strong> Open a GitHub Issue or email support with the above details. We'll respond within <strong>24–48 business hours</strong> to help diagnose. If we confirm a product defect preventing Quickstart completion, we will issue a full refund via Gumroad.</p>
+        <p><strong>Process:</strong> Open a GitHub Issue or email support with the above details. We'll respond within
+          <strong>24–48 business hours</strong> to help diagnose. If we confirm a product defect preventing Quickstart
+          completion, we will issue a full refund via Gumroad.</p>
 
         <p style="color: var(--muted-foreground); font-size: var(--text-sm); margin-top: 1.5rem;">
           Note: Gumroad processes the refund to your original payment method once we approve it.
@@ -478,4 +522,5 @@
 
   <script src="scripts/main.js"></script>
 </body>
+
 </html>

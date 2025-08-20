@@ -41,6 +41,22 @@ jobs:
             echo "Images directory found with $(find images -type f | wc -l) files"
           fi
 
+      - name: Check CSS directory
+        run: |
+          if [ ! -d "styles" ]; then 
+            echo "Warning: css directory not found"
+          else
+            echo "CSS directory found with $(find css -type f | wc -l) files"
+          fi
+
+      - name: Check JavaScript directory
+        run: |
+          if [ ! -d "scripts" ]; then
+            echo "Warning: js directory not found"
+          else  
+            echo "JavaScript directory found with $(find js -type f | wc -l) files"
+          fi  
+
   # Deploy job
   deploy:
     needs: build

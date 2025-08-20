@@ -1,207 +1,207 @@
 <!doctype html>
 <html lang="en">
-
 <head>
   <meta charset="utf-8" />
   <title>The CI/CD Fast-Track • Turn-Key GitHub Actions for AWS</title>
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <meta name="description" content="From git push to AWS in minutes – No YAML wrestling. Ship today; polish later." />
-  <link rel="canonical" href="https://bigmangotree.github.io/index.html" />
   <link rel="stylesheet" href="styles/main.css" />
 </head>
 
-<body>
-  <!-- Header Navigation -->
-  <header class="header-main">
-    <div class="layout-container">
-      <nav class="nav-container">
-        <a href="#hero" class="nav-brand">
-          <img src="images/bigmangotree-logo.png" alt="BigMangoTree Logo" class="nav-brand__logo">
-          BigMangoTree
-        </a>
+<!-- THEME CONTROLLER: Change this attribute to switch entire theme -->
+<body data-theme="elegant">
+
+  <!-- HEADER: Universal structure -->
+  <header class="app-header">
+    <div class="section-container">
+      <nav class="nav-wrapper">
+        <div class="brand-area">
+          <img src="images/bigmangotree-logo.png" alt="Logo" class="brand-logo">
+          <span class="brand-text">BigMangoTree</span>
+        </div>
         <ul class="nav-menu">
-          <li><a href="#features" class="nav-link">Why</a></li>
-          <li><a href="#how-it-works" class="nav-link">How</a></li>
-          <li><a href="#products" class="nav-link">Variants</a></li>
-          <li><a href="#comparison" class="nav-link">Compare</a></li>
-          <li><a href="#demo" class="nav-link">Demo</a></li>
-          <li><a href="#faq" class="nav-link">FAQ</a></li>
-          <li><a href="#about" class="nav-link">About</a></li>
-          <li><a href="#support" class="nav-link">Support</a></li>
+          <li><a href="#hero" class="nav-item">Why</a></li>
+          <li><a href="#features" class="nav-item">How</a></li>
+          <li><a href="#products" class="nav-item">Variants</a></li>
+          <li><a href="#comparison" class="nav-item">Compare</a></li>
+          <li><a href="#demo" class="nav-item">Demo</a></li>
+          <li><a href="#faq" class="nav-item">FAQ</a></li>
+          <li><a href="#about" class="nav-item">About</a></li>
+          <li><a href="#support" class="nav-item">Support</a></li>
         </ul>
       </nav>
     </div>
   </header>
 
-  <!-- Hero Section -->
-  <section id="hero" class="layout-section layout-section--hero">
-    <div class="hero-visual-container">
-      <div class="hero-content">
-        <span class="hero-badge">BigMangoTree</span>
-        <h1 class="hero-title">The CI/CD Fast-Track</h1>
-        <p class="hero-subtitle">From git push to AWS in minutes – No YAML wrestling. Ship today; polish later.</p>
-        <div class="hero-actions">
-          <a href="GUMROAD_20_FLASK" class="btn btn--primary">Buy $20 Flask</a>
-          <a href="#products" class="btn btn--secondary">See all variants</a>
+  <!-- HERO SECTION: Universal split layout -->
+  <section id="hero" class="app-section" data-section="hero" data-layout="split">
+    <div class="section-container">
+      <div class="content-grid">
+        <div class="content-area">
+          <div class="content-badge">BigMangoTree</div>
+          <h1 class="content-title">The CI/CD Fast-Track</h1>
+          <p class="content-subtitle">From git push to AWS in minutes – No YAML wrestling. Ship today; polish later.</p>
+          <div class="action-group">
+            <a href="#" class="action-btn action-btn--primary">Buy $20 Flask</a>
+            <a href="#products" class="action-btn action-btn--secondary">See all variants</a>
+          </div>
+          <p class="content-note">
+            Checksum included • Community support • 7-day refund
+            <span class="note-highlight" data-modal="#refund-modal">*</span>
+          </p>
         </div>
-        <p class="text-center mt-lg" style="font-size: var(--font-size-sm); opacity: 0.8;">
-          Checksum included • Community support • 7-day refund
-          <sup style="cursor: pointer; color: #ff6b6b;" data-modal-open="#refund-modal">*</sup>
-        </p>
-      </div>
-      <div class="hero-visual-area">
-        <div class="hero-visual-accent"></div>
-        <div class="hero-visual-bg"></div>
-        <div class="hero-visual-main">
-          <span style="font-size: 4rem;">🚀</span>
+        <div class="visual-area">
+          <div class="visual-element visual-element--main">🚀</div>
+          <div class="visual-element visual-element--accent"></div>
+          <div class="visual-element visual-element--bg"></div>
         </div>
       </div>
     </div>
   </section>
 
-  <!-- Features Section -->
-  <section id="features" class="layout-section">
-    <div class="layout-container">
+  <!-- FEATURES SECTION: Universal grid layout -->
+  <section id="features" class="app-section" data-section="features" data-layout="grid">
+    <div class="section-container">
       <div class="section-header">
         <h2 class="section-title">One Platform To Meet All Needs</h2>
-        <p class="section-subtitle">Everything you need to deploy fast and iterate faster</p>
+        <p class="section-description">Everything you need to deploy fast and iterate faster</p>
       </div>
-      <div class="feature-grid">
-        <div class="card">
-          <div class="card__icon">⚡</div>
-          <h3 class="card__title">Ship first, refine later</h3>
-          <p class="card__description">A working pipeline in minutes. Read the code and tune it when you're ready.</p>
+      <div class="content-grid">
+        <div class="feature-card">
+          <div class="card-icon">⚡</div>
+          <h3 class="card-title">Ship first, refine later</h3>
+          <p class="card-description">A working pipeline in minutes. Read the code and tune it when you're ready.</p>
         </div>
-        <div class="card">
-          <div class="card__icon">🔧</div>
-          <h3 class="card__title">Practical defaults</h3>
-          <p class="card__description">EC2 + Nginx/Gunicorn, pinned Terraform, reproducible GitHub Actions—no hidden
-            magic.</p>
+        <div class="feature-card">
+          <div class="card-icon">🔧</div>
+          <h3 class="card-title">Practical defaults</h3>
+          <p class="card-description">EC2 + Nginx/Gunicorn, pinned Terraform, reproducible GitHub Actions—no hidden magic.</p>
         </div>
-        <div class="card">
-          <div class="card__icon">⏰</div>
-          <h3 class="card__title">Time well spent</h3>
-          <p class="card__description">Skip YAML/IAM rabbit holes. Focus on your app, not the plumbing.</p>
+        <div class="feature-card">
+          <div class="card-icon">⏰</div>
+          <h3 class="card-title">Time well spent</h3>
+          <p class="card-description">Skip YAML/IAM rabbit holes. Focus on your app, not the plumbing.</p>
         </div>
-        <div class="card">
-          <div class="card__icon">🔒</div>
-          <h3 class="card__title">Secure purchase</h3>
-          <p class="card__description">Buy via Gumroad, instant download, verified checksums for integrity.</p>
+        <div class="feature-card">
+          <div class="card-icon">🔒</div>
+          <h3 class="card-title">Secure purchase</h3>
+          <p class="card-description">Buy via Gumroad, instant download, verified checksums for integrity.</p>
         </div>
-        <div class="card">
-          <div class="card__icon">✅</div>
-          <h3 class="card__title">Clear expectations</h3>
-          <p class="card__description">Community support. 7-day refund if Quickstart can't be completed (with logs).</p>
+        <div class="feature-card">
+          <div class="card-icon">✅</div>
+          <h3 class="card-title">Clear expectations</h3>
+          <p class="card-description">Community support. 7-day refund if Quickstart can't be completed (with logs).</p>
         </div>
-        <div class="card">
-          <div class="card__icon">🛠️</div>
-          <h3 class="card__title">Mod-friendly</h3>
-          <p class="card__description">Plain Terraform + Actions. Change instance types, steps, AMIs—make it yours.</p>
+        <div class="feature-card">
+          <div class="card-icon">🛠️</div>
+          <h3 class="card-title">Mod-friendly</h3>
+          <p class="card-description">Plain Terraform + Actions. Change instance types, steps, AMIs—make it yours.</p>
         </div>
       </div>
     </div>
   </section>
 
-  <!-- How It Works Section -->
-  <section id="how-it-works" class="layout-section layout-section--alt">
-    <div class="layout-container">
-      <div class="layout-grid layout-grid--2col">
-        <div>
-          <h2 class="section-title text-left">One Framework For Every Application</h2>
+  <!-- HOW IT WORKS: Universal split layout -->
+  <section id="how-it-works" class="app-section" data-section="how-it-works" data-layout="split">
+    <div class="section-container">
+      <div class="content-grid">
+        <div class="content-area">
+          <h2 class="content-title">One Framework For Every Application</h2>
           <div class="step-list">
-            <div class="step-item">
+            <div class="step-item" data-step="1">
               <div class="step-content">
-                <h3>Spin up EC2</h3>
-                <p>Use the setup script to get your infrastructure ready with pre-configured security and networking.
-                </p>
+                <h3 class="step-title">Spin up EC2</h3>
+                <p class="step-description">Use the setup script to get your infrastructure ready with pre-configured security and networking.</p>
               </div>
             </div>
-            <div class="step-item">
+            <div class="step-item" data-step="2">
               <div class="step-content">
-                <h3>Add GitHub secrets</h3>
-                <p>Configure AWS keys and region in your repository settings with our guided setup process.</p>
+                <h3 class="step-title">Add GitHub secrets</h3>
+                <p class="step-description">Configure AWS keys and region in your repository settings with our guided setup process.</p>
               </div>
             </div>
-            <div class="step-item">
+            <div class="step-item" data-step="3">
               <div class="step-content">
-                <h3>Push to main</h3>
-                <p>The pipeline builds and deploys to a public URL automatically with zero configuration.</p>
+                <h3 class="step-title">Push to main</h3>
+                <p class="step-description">The pipeline builds and deploys to a public URL automatically with zero configuration.</p>
               </div>
             </div>
           </div>
-          <div class="mt-xl">
-            <a href="#products" class="btn btn--outline">Explore Solutions</a>
+          <div class="action-group">
+            <a href="#products" class="action-btn action-btn--outline">Explore Solutions</a>
           </div>
         </div>
-        <div class="hero-visual">⚡</div>
+        <div class="visual-area">
+          <div class="visual-element visual-element--main">⚡</div>
+        </div>
       </div>
     </div>
   </section>
 
-  <!-- Products Section -->
-  <section id="products" class="layout-section">
-    <div class="layout-container">
+  <!-- PRODUCTS SECTION: Universal card layout -->
+  <section id="products" class="app-section" data-section="products" data-layout="cards">
+    <div class="section-container">
       <div class="section-header">
-        <h2 class="section-title">One Framework For Every Cryptocurrency</h2>
-        <p class="section-subtitle">Choose your deployment strategy</p>
+        <h2 class="section-title">Choose your deployment strategy</h2>
+        <p class="section-description">Pick the solution that fits your needs</p>
       </div>
-      <div class="layout-grid layout-grid--2col">
-        <div class="card card--product">
-          <div class="card__price">$20</div>
-          <div style="padding: var(--space-xl);">
-            <h3 class="card__title">HTML to AWS Lightsail</h3>
-            <ul style="text-align: left; margin: var(--space-md) 0;">
+      <div class="content-grid">
+        <div class="product-card" data-product="basic">
+          <div class="product-price">$20</div>
+          <div class="product-content">
+            <h3 class="product-title">HTML to AWS Lightsail</h3>
+            <ul class="product-features">
               <li>Static site → Nginx on Lightsail/EC2</li>
               <li>Push-to-deploy workflow + Quickstart</li>
             </ul>
-            <a href="GUMROAD_20_HTML" class="btn btn--primary">Buy $20 HTML</a>
+            <a href="#" class="action-btn action-btn--primary">Buy $20 HTML</a>
           </div>
         </div>
-        <div class="card card--product">
-          <div class="card__price">$20</div>
-          <div style="padding: var(--space-xl);">
-            <h3 class="card__title">Python to AWS EC2</h3>
-            <ul style="text-align: left; margin: var(--space-md) 0;">
+        <div class="product-card" data-product="basic">
+          <div class="product-price">$20</div>
+          <div class="product-content">
+            <h3 class="product-title">Python to AWS EC2</h3>
+            <ul class="product-features">
               <li>Flask demo → EC2 with Gunicorn + Nginx</li>
               <li>Push-to-deploy workflow + Quickstart</li>
             </ul>
-            <a href="GUMROAD_20_FLASK" class="btn btn--primary">Buy $20 Flask</a>
+            <a href="#" class="action-btn action-btn--primary">Buy $20 Flask</a>
           </div>
         </div>
-        <div class="card card--product card--featured">
-          <div class="card__price">$50</div>
-          <div style="padding: var(--space-xl);">
-            <h3 class="card__title">HTML + Terraform to AWS EC2</h3>
-            <ul style="text-align: left; margin: var(--space-md) 0;">
+        <div class="product-card" data-product="premium">
+          <div class="product-price">$50</div>
+          <div class="product-content">
+            <h3 class="product-title">HTML + Terraform to AWS EC2</h3>
+            <ul class="product-features">
               <li>Multi-env Terraform (Dev auto; Staging/Prod manual)</li>
               <li>Destroy workflow + CI caching</li>
             </ul>
-            <a href="GUMROAD_50_HTML" class="btn btn--primary">Buy $50 HTML</a>
+            <a href="#" class="action-btn action-btn--primary">Buy $50 HTML</a>
           </div>
         </div>
-        <div class="card card--product">
-          <div class="card__price">$50</div>
-          <div style="padding: var(--space-xl);">
-            <h3 class="card__title">Terraform & Python to EC2</h3>
-            <ul style="text-align: left; margin: var(--space-md) 0;">
+        <div class="product-card" data-product="premium">
+          <div class="product-price">$50</div>
+          <div class="product-content">
+            <h3 class="product-title">Terraform & Python to EC2</h3>
+            <ul class="product-features">
               <li>Multi-env Terraform (Dev auto; Staging/Prod manual)</li>
               <li>Dockerized build + promotion scripts</li>
             </ul>
-            <a href="GUMROAD_50_FLASK" class="btn btn--primary">Buy $50 Flask</a>
+            <a href="#" class="action-btn action-btn--primary">Buy $50 Flask</a>
           </div>
         </div>
       </div>
     </div>
   </section>
 
-  <!-- Comparison Section -->
-  <section id="comparison" class="layout-section layout-section--alt">
-    <div class="layout-container">
+  <!-- COMPARISON SECTION: Universal table layout -->
+  <section id="comparison" class="app-section" data-section="comparison" data-layout="table">
+    <div class="section-container">
       <div class="section-header">
         <h2 class="section-title">Turn-Key Options Compared</h2>
       </div>
-      <div class="table-container">
-        <table class="table">
+      <div class="table-wrapper">
+        <table class="comparison-table">
           <thead>
             <tr>
               <th>Feature</th>
@@ -221,10 +221,10 @@
             </tr>
             <tr>
               <td>Quickstart CI/CD</td>
-              <td><span class="table-checkmark">✓</span></td>
-              <td><span class="table-checkmark">✓</span></td>
-              <td><span class="table-checkmark">✓</span></td>
-              <td><span class="table-checkmark">✓</span></td>
+              <td><span class="check-mark">✓</span></td>
+              <td><span class="check-mark">✓</span></td>
+              <td><span class="check-mark">✓</span></td>
+              <td><span class="check-mark">✓</span></td>
             </tr>
             <tr>
               <td>Deploy Target</td>
@@ -237,256 +237,73 @@
               <td>Manual Deploy</td>
               <td>-</td>
               <td>-</td>
-              <td><span class="table-checkmark">✓</span></td>
-              <td><span class="table-checkmark">✓</span></td>
-            </tr>
-            <tr>
-              <td>Docker Workflow</td>
-              <td>-</td>
-              <td>-</td>
-              <td><span class="table-checkmark">✓</span></td>
-              <td><span class="table-checkmark">✓</span></td>
-            </tr>
-            <tr>
-              <td>Terraform Guardrails</td>
-              <td>-</td>
-              <td>-</td>
-              <td><span class="table-checkmark">✓</span></td>
-              <td><span class="table-checkmark">✓</span></td>
+              <td><span class="check-mark">✓</span></td>
+              <td><span class="check-mark">✓</span></td>
             </tr>
           </tbody>
         </table>
       </div>
-      <p class="text-center mt-lg text-secondary">
-        Need simple deploys? Pick $20. Need multi-env repeatability? Pick $50.
-      </p>
     </div>
   </section>
 
-  <!-- Demo Section -->
-  <section id="demo" class="layout-section">
-    <div class="layout-container">
+  <!-- FAQ SECTION: Universal accordion layout -->
+  <section id="faq" class="app-section" data-section="faq" data-layout="accordion">
+    <div class="section-container">
       <div class="section-header">
-        <h2 class="section-title">Watch it ship (2 minutes)</h2>
+        <h2 class="section-title">Frequently Asked Questions</h2>
       </div>
-      <div
-        style="position: relative; padding-top: 56.25%; border-radius: var(--border-radius); overflow: hidden; box-shadow: var(--shadow-lg);">
-        <iframe src="https://www.youtube.com/embed/VIDEO_ID" title="BigMangoTree CI/CD Fast-Track Demo"
-          style="position: absolute; top: 0; left: 0; width: 100%; height: 100%; border: 0;" allowfullscreen>
-        </iframe>
-      </div>
-      <p class="text-center mt-md text-secondary">
-        Uncut run: push → Actions → live URL
-      </p>
-    </div>
-  </section>
-
-  <!-- FAQ Section -->
-  <section id="faq" class="layout-section layout-section--alt">
-    <div class="layout-container">
-      <div class="section-header">
-        <h2 class="section-title">Lexicon FAQ</h2>
-      </div>
-      <div class="faq-container">
+      <div class="faq-wrapper">
         <details class="faq-item">
           <summary class="faq-question">What's the difference between $20 and $50?</summary>
           <div class="faq-answer">
-            <p>$20 = single-env push-to-deploy (HTML or Flask). $50 = multi-env (Dev auto + manual Staging/Prod),
-              Terraform guardrails, destroy workflow, caching. Flask Pro adds Docker build + promotion scripts.</p>
+            <p>$20 = single-env push-to-deploy (HTML or Flask). $50 = multi-env (Dev auto + manual Staging/Prod), Terraform guardrails, destroy workflow, caching.</p>
           </div>
         </details>
-
         <details class="faq-item">
           <summary class="faq-question">Can I upgrade from $20 to $50 later?</summary>
           <div class="faq-answer">
-            <p>Yes. Replace the $20 workflows with the $50 set and follow the Quickstart. Your infra state can stay; you
-              mainly swap CI steps (test on a new branch first).</p>
+            <p>Yes. Replace the $20 workflows with the $50 set and follow the Quickstart. Your infra state can stay; you mainly swap CI steps.</p>
           </div>
         </details>
-
         <details class="faq-item">
           <summary class="faq-question">Can I customize it?</summary>
           <div class="faq-answer">
-            <p>Absolutely. You're licensed to modify for your own projects: edit variables (region, instance type), add
-              steps (linters/tests), swap AMIs, or extend the pipeline.</p>
-          </div>
-        </details>
-
-        <details class="faq-item">
-          <summary class="faq-question">What's the support model?</summary>
-          <div class="faq-answer">
-            <p>Community support only. If AWS/GitHub changes break a script, open a GitHub Issue with logs—we'll patch.
-              No 1:1 consulting or SLAs included.</p>
-          </div>
-        </details>
-
-        <details class="faq-item">
-          <summary class="faq-question">Refunds?</summary>
-          <div class="faq-answer">
-            <p>We want you to succeed. If you can't complete the Quickstart within 7 days and share relevant
-              logs/errors, you qualify for a refund. <a href="#" data-modal-open="#refund-modal">Read full Refund
-                Policy</a></p>
+            <p>Absolutely. You're licensed to modify for your own projects: edit variables, add steps, swap AMIs, or extend the pipeline.</p>
           </div>
         </details>
       </div>
     </div>
   </section>
 
-  <!-- Current Road Map Section -->
-  <section class="layout-section">
-    <div class="layout-container">
-      <div class="section-header">
-        <h2 class="section-title">Current Road Map</h2>
-      </div>
-      <div class="step-list" style="max-width: 800px; margin: 0 auto;">
-        <div class="step-item">
-          <div class="step-content">
-            <h3>Beta Testing</h3>
-            <p>Testing with select customers and refining core features based on feedback</p>
-          </div>
-        </div>
-        <div class="step-item">
-          <div class="step-content">
-            <h3>Azure and GCP Support</h3>
-            <p>Expanding beyond AWS to support multi-cloud deployments</p>
-          </div>
-        </div>
-        <div class="step-item">
-          <div class="step-content">
-            <h3>Auto Scaling Service</h3>
-            <p>Intelligent scaling based on traffic patterns and resource utilization</p>
-          </div>
-        </div>
-        <div class="step-item">
-          <div class="step-content">
-            <h3>Best Practices</h3>
-            <p>Comprehensive guides and templates for production-ready deployments</p>
-          </div>
-        </div>
-        <div class="step-item">
-          <div class="step-content">
-            <h3>Private Development</h3>
-            <p>Enterprise features including private repositories and custom integrations</p>
-          </div>
-        </div>
-      </div>
-    </div>
-  </section>
-
-  <!-- About Section -->
-  <section id="about" class="layout-section layout-section--alt">
-    <div class="layout-container">
-      <div class="section-header">
-        <h2 class="section-title">Advisory Team</h2>
-        <p class="section-subtitle">Experienced builders focused on practical solutions</p>
-      </div>
-      <div class="layout-grid layout-grid--3col">
-        <div class="card text-center">
-          <div
-            style="width: 80px; height: 80px; background: var(--brand-primary); border-radius: 50%; margin: 0 auto var(--space-md); display: flex; align-items: center; justify-content: center; font-size: var(--font-size-2xl); color: var(--text-inverse);">
-            👨‍💻</div>
-          <h3 class="card__title">Lead Developer</h3>
-          <p class="card__description">10+ years building CI/CD pipelines for startups and enterprises</p>
-        </div>
-        <div class="card text-center">
-          <div
-            style="width: 80px; height: 80px; background: var(--brand-primary); border-radius: 50%; margin: 0 auto var(--space-md); display: flex; align-items: center; justify-content: center; font-size: var(--font-size-2xl); color: var(--text-inverse);">
-            ☁️</div>
-          <h3 class="card__title">Cloud Architect</h3>
-          <p class="card__description">AWS certified professional with expertise in scalable infrastructure</p>
-        </div>
-        <div class="card text-center">
-          <div
-            style="width: 80px; height: 80px; background: var(--brand-primary); border-radius: 50%; margin: 0 auto var(--space-md); display: flex; align-items: center; justify-content: center; font-size: var(--font-size-2xl); color: var(--text-inverse);">
-            🚀</div>
-          <h3 class="card__title">DevOps Engineer</h3>
-          <p class="card__description">Automation specialist focused on developer experience and reliability</p>
-        </div>
-      </div>
-    </div>
-  </section>
-
-  <!-- Support Section -->
-  <section id="support" class="layout-section">
-    <div class="layout-container">
-      <div class="section-header">
-        <h2 class="section-title">Support & Links</h2>
-      </div>
-      <div
-        style="display: flex; justify-content: center; gap: var(--space-md); flex-wrap: wrap; margin-bottom: var(--space-xl);">
-        <a href="https://github.com/your-org/your-repo/issues" class="btn btn--outline">Issues Board</a>
-        <a href="https://github.com/your-org/your-repo/issues/new/choose" class="btn btn--outline">New Issue</a>
-        <a href="https://github.com/your-org/your-repo" class="btn btn--outline">Documentation</a>
-      </div>
-      <p class="text-center text-secondary">
-        Community support only • Typical reply 24–48h (business days) • Email: support@yourdomain.com
-      </p>
-    </div>
-  </section>
-
-  <!-- Footer -->
-  <footer class="footer-main">
-    <div class="layout-container">
+  <!-- FOOTER: Universal structure -->
+  <footer class="app-footer">
+    <div class="section-container">
       <div class="footer-content">
         <h3 class="footer-title">The CI/CD Fast-Track</h3>
-        <p class="mb-xl">From git push to AWS in minutes – No YAML wrestling. Ship today; polish later.</p>
-        <a href="#products" class="btn btn--primary">See All Solutions</a>
+        <p class="footer-description">From git push to AWS in minutes – No YAML wrestling. Ship today; polish later.</p>
+        <a href="#products" class="action-btn action-btn--primary">See All Solutions</a>
       </div>
-
       <div class="footer-links">
-        <a href="#" data-modal-open="#privacy-modal" class="footer-link">Privacy Policy</a>
+        <a href="#" class="footer-link">Privacy Policy</a>
         <span>•</span>
         <span>Not affiliated with AWS or GitHub</span>
       </div>
-
-      <p style="opacity: 0.6; font-size: var(--font-size-sm); margin-top: var(--space-md);">
-        © BigMangoTree
-      </p>
+      <p class="footer-copyright">© BigMangoTree</p>
     </div>
   </footer>
 
-  <!-- Scroll to Top Button -->
-  <button id="scrollTopBtn" class="scroll-top" title="Go to top">↑</button>
-
-  <!-- Privacy Policy Modal -->
-  <div id="privacy-modal" class="modal-overlay" aria-hidden="true" role="dialog">
+  <!-- MODALS: Universal structure -->
+  <div id="refund-modal" class="modal-overlay" aria-hidden="true">
     <div class="modal-dialog">
-      <button class="modal-close" data-modal-close aria-label="Close">✕</button>
-      <h3>Privacy Policy</h3>
-      <div style="color: var(--text-secondary); font-size: var(--font-size-sm); margin-bottom: var(--space-md);">
-        Effective: 20 Aug 2025</div>
-      <div>
-        <p>This site is a static website with no backend or user accounts. We don't collect personal details such as
-          names, emails, or payment information here.</p>
-        <p>We use Google Analytics to measure general traffic patterns. Data collected may include your IP address but
-          we don't sell or share this data.</p>
-        <p><strong>Payments:</strong> Handled by Gumroad under their terms and privacy policy.</p>
-        <p><strong>Support:</strong> GitHub Issues are public. Email support is used only for replies and not shared
-          with third parties.</p>
-      </div>
-    </div>
-  </div>
-
-  <!-- Refund Policy Modal -->
-  <div id="refund-modal" class="modal-overlay" aria-hidden="true" role="dialog">
-    <div class="modal-dialog">
-      <button class="modal-close" data-modal-close aria-label="Close">✕</button>
+      <button class="modal-close" data-modal-close>✕</button>
       <h3>Refund Policy</h3>
-      <div style="color: var(--text-secondary); font-size: var(--font-size-sm); margin-bottom: var(--space-md);">
-        Effective for all CI/CD Fast-Track products sold via Gumroad
-      </div>
-      <div>
+      <div class="modal-content">
         <p><strong>Window:</strong> 7 calendar days from purchase</p>
         <p><strong>Eligibility:</strong> Unable to complete documented Quickstart with provided logs</p>
-        <p><strong>Process:</strong> Open GitHub Issue or email support with order details, environment info, and
-          failure logs</p>
-        <p><strong>Exclusions:</strong> Incorrect credentials, modified workflows, third-party outages, or buyer's
-          remorse</p>
       </div>
     </div>
   </div>
 
   <script src="scripts/main.js"></script>
 </body>
-
 </html>

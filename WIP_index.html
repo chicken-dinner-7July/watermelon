@@ -1,0 +1,683 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <title>The CI/CD Fast-Track • Turn-Key GitHub Actions for AWS</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta name="description" content="From git push to AWS in minutes — No YAML wrestling. Ship today; polish later." />
+  <link rel="canonical" href="https://bigmangotree.github.io/index.html" />
+  <style>
+    :root{
+      --ink:#0b1220; --muted:#6b7280; --line:#e6e6e6; --bg:#ffffff; --bg-alt:#f7f7f9; --accent:#0b1220;
+      --radius:12px;
+      --hero-grad: linear-gradient(120deg, #eff6ff 0%, #f5f3ff 50%, #fdf2f8 100%);
+      --section-grad: linear-gradient(180deg, rgba(255,255,255,0) 0%, rgba(255,255,255,.6) 60%, rgba(255,255,255,.95) 100%);
+    }
+    *{box-sizing:border-box}
+    body{font-family:system-ui,-apple-system,Segoe UI,Roboto,Inter,Arial,sans-serif;line-height:1.55;margin:0;color:var(--ink);background:var(--bg)}
+    header,section{padding:64px 20px;max-width:1080px;margin:0 auto;position:relative}
+    /* Alternating section backgrounds + subtle gradient overlay for even sections */
+    section:nth-of-type(odd){background:var(--bg)}
+    section:nth-of-type(even){
+      background: var(--bg-alt);
+      background-image: var(--section-grad);
+      background-blend-mode: lighten;
+    }
+    nav{position:sticky;top:0;z-index:10;background:#fff;border-bottom:1px solid var(--line);display:flex;gap:16px;align-items:center;padding:12px 20px}
+    nav a{text-decoration:none;color:var(--ink);font-weight:500}
+    .btn{display:inline-block;padding:12px 18px;border-radius:12px;border:1px solid var(--accent);text-decoration:none}
+    .btn.primary{background:var(--accent);color:#fff}
+    .btn.ghost{background:transparent;color:var(--ink)}
+    .grid{display:grid;gap:18px}
+    .grid.cols-2{grid-template-columns:repeat(auto-fit,minmax(280px,1fr))}
+    .grid.cols-3{grid-template-columns:repeat(auto-fit,minmax(260px,1fr))}
+    table{width:100%;border-collapse:collapse;margin-top:14px;background:#fff;border-radius:12px;overflow:hidden}
+    th,td{border:1px solid var(--line);padding:10px;text-align:left;vertical-align:top}
+    th{background:#fafafa}
+    .card{border:1px solid var(--line);border-radius:var(--radius);padding:18px;background:#fff}
+    .pill{display:inline-block;padding:4px 10px;border-radius:999px;border:1px solid var(--line);font-size:12px;color:var(--muted);background:#fff}
+    .muted{color:var(--muted)}
+    footer{padding:40px 20px;text-align:center;color:var(--muted);border-top:1px solid var(--line)}
+    details{border:1px solid var(--line);border-radius:10px;padding:12px 14px;margin:10px 0;background:#fff}
+    details summary{cursor:pointer;font-weight:600}
+    code{background:#f6f7f9;padding:2px 6px;border-radius:6px}
+    .hero h1{font-size:36px;margin:12px 0}
+    .hero p.lead{font-size:18px;margin:8px 0 18px}
+    /* Hero gradient background + image placeholder */
+    .hero-wrap{background:var(--hero-grad);background-size:cover;background-position:center}
+    .hero-wrap::after{
+      content:"";position:absolute;inset:0;pointer-events:none;
+      background:linear-gradient(180deg, rgba(255,255,255,0) 0%, rgba(255,255,255,.4) 60%, rgba(255,255,255,.9) 100%);
+    }
+    .corner-note{
+      position:absolute;right:20px;top:14px;font-size:12px;color:var(--muted);background:rgba(255,255,255,.7);
+      padding:6px 10px;border-radius:8px;border:1px solid var(--line);backdrop-filter:saturate(1.2) blur(4px)
+    }
+    /* Scroll to top button */
+      
+    #scrollTopBtn {
+      display: none;              /* Hidden by default */
+      position: fixed;            /* Fixed position */
+      bottom: 30px;               /* 30px from bottom */
+      right: 30px;                /* 30px from right */
+      z-index: 99;                /* On top of other elements */
+      font-size: 20px;            /* Arrow size */
+      border: none;
+      outline: none;
+      background-color: #333;     /* Dark round button */
+      color: white;
+      cursor: pointer;
+      padding: 12px 19px;
+      border-radius: 50%;         /* Makes it round */
+      box-shadow: 0 2px 6px rgba(0,0,0,0.3);
+      transition: background 0.3s, transform 0.2s;
+    }
+
+    #scrollTopBtn:hover {
+      background-color: #555;
+      transform: scale(1.1);
+    }
+    /* Modal */
+    .modal-overlay {
+      position: fixed; inset: 0; display: none;
+      background: rgba(15, 18, 25, 0.5);
+      align-items: center; justify-content: center;
+      padding: 20px; z-index: 1000;
+    }
+    .modal-overlay[aria-hidden="false"] { display: flex; }
+
+    .modal-dialog {
+      background: #fff; border: 1px solid var(--line);
+      border-radius: 14px; max-width: 720px; width: 100%;
+      box-shadow: 0 10px 30px rgba(0,0,0,.15);
+      padding: 20px 20px 16px;
+      position: relative;
+    }
+    .modal-close {
+      position: absolute; top: 10px; right: 10px;
+      border: 1px solid var(--line); background: #fff; color: var(--ink);
+      border-radius: 10px; padding: 6px 10px; cursor: pointer;
+    }
+    .modal-content p { margin: 10px 0 12px; }
+    .modal-content ul { margin: 6px 0 12px 18px; }
+
+    .variants-grid {
+      gap: 24px;
+    }
+    .product-card {
+      background: linear-gradient(135deg, #f9fafb, #eef2f7);
+      border: 1px solid #ddd;
+      border-radius: 12px;
+      padding: 18px;
+      box-shadow: 0 4px 12px rgba(0,0,0,0.08);
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+      transition: transform 0.2s ease;
+    }
+    .product-card:hover {
+      transform: translateY(-4px);
+    }
+    .product-img {
+      width: 100%;
+      height: 140px;
+      object-fit: cover;
+      border-radius: 8px;
+      margin-bottom: 12px;
+    }
+    .highlight-card {
+      background: linear-gradient(135deg, #1e3a8a, #3b82f6);
+      color: #fff;
+      border: 3px solid #2563eb;
+    }
+    .highlight-card .muted {
+      color: #cbd5e1 !important;
+    }
+    .highlight-card a.btn.primary {
+      background: #fff;
+      color: #1e3a8a;
+    }
+  </style>
+
+</head>
+<body>
+ <nav style="display:flex; align-items:center; justify-content:space-between; gap:20px;">
+  <!-- Logo placeholder -->
+  <a href="#hero" style="display:inline-block;">
+    <img src="images/bigmangotree-logo.png" alt="BigMangoTree Logo" style="height:66px; width:auto; max-width:190px;">
+  </a>
+
+  <!-- Links -->
+  <div style="display:flex; gap:16px; align-items:center;">
+    <a href="#value">Why</a>
+    <a href="#steps">How</a>
+    <a href="#variants">Variants</a>
+    <a href="#compare">Compare</a>
+    <a href="#demo">Demo</a>
+    <a href="#faq">FAQ</a>
+    <a href="#who">Who we are</a>
+    <a href="#support">Support</a>
+  </div>
+</nav>
+  <!-- HERO (gradient background) -->
+  <div class="hero-wrap">
+    <header id="hero" class="hero">
+      <span class="corner-note">Not affiliated with AWS or GitHub</span>
+      <span class="pill">BigMangoTree</span>
+      <h1>🚀 The CI/CD Fast-Track: Turn-Key GitHub Actions for AWS</h1>
+      <p class="lead">From <code>git push</code> to AWS in minutes — No YAML wrestling. Ship today; polish later.</p>
+      <p>
+        <a class="btn primary" href="GUMROAD_20_FLASK?utm_source=site&utm_medium=hero&utm_campaign=launch_v1&utm_content=flask20">Buy $20 Flask</a>
+        <a class="btn ghost" href="#variants">See all variants</a>
+      </p>
+  <p class="muted" style="font-size:14px">
+    Checksum included • Community support • 
+    7-day refund (Quickstart + logs)
+    <sup 
+      id="open-refund-policy" data-modal-open="#refund-modal"
+      title="Terms and conditions apply. Click to view details."
+      style="cursor:pointer; color:#d9534f; font-weight:bold;"
+    >*</sup>
+  </p>
+    </header>
+  </div>
+
+  <!-- WHY / VALUE -->
+  <section id="value">
+    <h2>Why Fast-Track?</h2>
+    <div class="grid cols-3">
+      <div class="card">
+        <strong>Ship first, refine later</strong>
+        <p class="muted" style="margin:8px 0 0">
+          A working pipeline in minutes. Read the code and tune it when you’re ready.
+        </p>
+      </div>
+      <div class="card">
+        <strong>Practical defaults</strong>
+        <p class="muted" style="margin:8px 0 0">
+          EC2 + Nginx/Gunicorn, pinned Terraform, reproducible GitHub Actions—no hidden magic.
+        </p>
+      </div>
+      <div class="card">
+        <strong>Time well spent</strong>
+        <p class="muted" style="margin:8px 0 0">
+          Skip YAML/IAM rabbit holes. Focus on your app, not the plumbing.
+        </p>
+      </div>
+      <div class="card">
+        <strong>Secure purchase</strong>
+        <p class="muted" style="margin:8px 0 0">
+          Buy via Gumroad, instant download, verified checksums for integrity.
+        </p>
+      </div>
+      <div class="card">
+        <strong>Clear expectations</strong>
+        <p class="muted" style="margin:8px 0 0">
+          Community support. 7-day refund if Quickstart can’t be completed (with logs). <a href="#" id="open-refund-policy" style="text-decoration:underline">Refund Policy</a>.
+        </p>
+      </div>
+   
+      <div class="card">
+        <strong>Mod-friendly</strong>
+        <p class="muted" style="margin:8px 0 0">
+          Plain Terraform + Actions. Change instance types, steps, AMIs—make it yours.
+        </p>
+      </div>
+    </div>
+  </section>
+
+ <!-- HOW IT WORKS -->
+  <section id="steps" style="display:flex; align-items:flex-start; gap:24px; max-width:960px; margin:auto;">
+    
+    <!-- Left column: Image -->
+    <div style="flex:1; min-width:280px;">
+      <img src="images/placeholder.png" alt="How it works diagram" style="width:100%; border-radius:8px; box-shadow:0 2px 6px rgba(0,0,0,0.2);">
+    </div>
+
+    <!-- Right column: Text -->
+    <div style="flex:2;">
+      <h2>How it works (3 steps)</h2>
+      <p class="muted" style="max-width:720px">
+        <strong>Ship today; polish later.</strong> Get it live fast, then iterate—nothing in this repo locks you in.
+      </p>
+      <ol>
+        <li><strong>Spin up EC2</strong> with the setup script.</li>
+        <li><strong>Add GitHub secrets</strong> (AWS keys, region).</li>
+        <li><strong>Push to</strong> <code>main</code> — the pipeline builds and deploys to a public URL.</li>
+      </ol>
+    </div>
+
+  </section>
+
+  <section id="variants">
+  <h2>Choose your Fast-Track pipeline</h2>
+  <div class="grid cols-2 variants-grid">
+    
+    <!-- $20 HTML -->
+    <div class="card product-card">
+      <img src="images/placeholder.png" alt="HTML $20 pipeline" class="product-img">
+      <h3>$20 — The CI/CD Fast-Track: HTML to AWS Lightsail <span class="muted">(GitHub Actions Edition)</span></h3>
+      <ul>
+        <li>Static site → Nginx on Lightsail/EC2</li>
+        <li>Push-to-deploy workflow + Quickstart</li>
+      </ul>
+      <p><a class="btn primary" href="GUMROAD_20_HTML?utm_source=site&utm_medium=variants&utm_campaign=launch_v1&utm_content=html20">Buy $20 HTML</a></p>
+    </div>
+
+    <!-- $20 Flask -->
+    <div class="card product-card">
+      <img src="images/placeholder.png" alt="Flask $20 pipeline" class="product-img">
+      <h3>$20 — The CI/CD Fast-Track: Python to AWS EC2 <span class="muted">(GitHub Actions Edition)</span></h3>
+      <ul>
+        <li>Flask demo → EC2 with Gunicorn + Nginx</li>
+        <li>Push-to-deploy workflow + Quickstart</li>
+      </ul>
+      <p><a class="btn primary" href="GUMROAD_20_FLASK?utm_source=site&utm_medium=variants&utm_campaign=launch_v1&utm_content=flask20">Buy $20 Flask</a></p>
+    </div>
+
+    <!-- $50 HTML (highlighted) -->
+    <div class="card product-card highlight-card">
+      <img src="images/placeholder.png" alt="HTML $50 pipeline" class="product-img">
+      <h3>$50 — The CI/CD Fast-Track: HTML + Terraform to AWS EC2 <span class="muted">(GitHub Actions Edition)</span></h3>
+      <ul>
+        <li>Multi-env Terraform (Dev auto; Staging/Prod manual)</li>
+        <li>Destroy workflow + CI caching</li>
+      </ul>
+      <p><a class="btn primary" href="GUMROAD_50_HTML?utm_source=site&utm_medium=variants&utm_campaign=launch_v1&utm_content=html50">Buy $50 HTML</a></p>
+    </div>
+
+    <!-- $50 Flask -->
+    <div class="card product-card">
+      <img src="images/placeholder.png" alt="Flask $50 pipeline" class="product-img">
+      <h3>$50 — The CI/CD Fast-Track: Terraform &amp; Python to EC2 <span class="muted">(GitHub Actions Edition)</span></h3>
+      <ul>
+        <li>Multi-env Terraform (Dev auto; Staging/Prod manual)</li>
+        <li>Dockerized build + promotion scripts</li>
+      </ul>
+      <p><a class="btn primary" href="GUMROAD_50_FLASK?utm_source=site&utm_medium=variants&utm_campaign=launch_v1&utm_content=flask50">Buy $50 Flask</a></p>
+    </div>
+
+  </div>
+</section>
+
+
+
+  <!-- COMPARISON -->
+  <section id="compare">
+    <h2>Turn-Key Options Compared</h2>
+    <table>
+      <tr>
+        <th>Feature</th>
+        <th>$20 HTML</th>
+        <th>$20 Flask</th>
+        <th>$50 HTML</th>
+        <th>$50 Flask</th>
+      </tr>
+      <tr>
+        <td>Ideal for</td>
+        <td>Best for launching a quick static site or portfolio with CI/CD in an afternoon.</td>
+        <td>Perfect for a simple Flask app or weekend project that needs easy push-to-deploy.</td>
+        <td>Great for teams wanting staged environments (Dev/Stage/Prod) for real projects or client work.</td>
+        <td>Best for hackathon winners who don’t want their Flask prototype to die on Monday.</td>
+      </tr>
+      <tr>
+        <td>Quickstart CI/CD</td>
+        <td>✅</td><td>✅</td><td>✅</td><td>✅</td>
+      </tr>
+      <tr>
+        <td>Deploy Target</td>
+        <td>Lightsail</td><td>EC2</td><td>EC2+Terraform</td><td>EC2+Terraform</td>
+      </tr>
+      <tr>
+        <td>Manual Deploy (Stage/Prod)</td>
+        <td>❌</td><td>❌</td><td>✅</td><td>✅</td>
+      </tr>
+      <tr>
+        <td>Docker Workflow</td>
+        <td>❌</td><td>❌</td><td>✅</td><td>✅</td>
+      </tr>
+      <tr>
+        <td>Mock Test Script</td>
+        <td>✅</td><td>✅</td><td>✅</td><td>✅</td>
+      </tr>
+      <tr>
+        <td>Terraform Guardrails</td>
+        <td>❌</td><td>❌</td><td>✅</td><td>✅</td>
+      </tr>
+    </table>
+    <p class="muted">Need simple deploys? Pick $20. Need multi-env repeatability and speed? Pick $50.</p>
+  </section>
+
+  <!-- DEMO -->
+  <section id="demo">
+    <h2>Watch it ship (2 minutes)</h2>
+    <div style="position:relative;padding-top:56.25%">
+      <iframe src="https://www.youtube.com/embed/VIDEO_ID"
+              title="BigMangoTree CI/CD Fast-Track Demo"
+              style="position:absolute;top:0;left:0;width:100%;height:100%;border:0"
+              allowfullscreen></iframe>
+    </div>
+    <p class="muted">Uncut run: push → Actions → live URL.</p>
+  </section>
+
+
+<!-- FAQ -->
+<section id="faq">
+  <h2>FAQ</h2>
+
+  <details><summary>What’s the difference between $20 and $50?</summary>
+    <p>$20 = single-env push-to-deploy (HTML or Flask).  
+    $50 = multi-env (Dev auto + manual Staging/Prod), Terraform guardrails, destroy workflow, caching.  
+    Flask Pro adds Docker build + promotion scripts.</p>
+  </details>
+
+  <details><summary>Can I upgrade from $20 to $50 later?</summary>
+    <p>Yes. Replace the $20 workflows with the $50 set and follow the Quickstart.  
+    Your infra state can stay; you mainly swap CI steps (test on a new branch first).</p>
+  </details>
+
+  <details><summary>What are the prerequisites?</summary>
+    <p>Each product has slightly different prerequisites.  
+    <mark>TODO: Update this section with exact versions and AWS services once final.</mark></p>
+
+    <table>
+      <tr>
+        <th>Prerequisite</th>
+        <th>$20 HTML</th>
+        <th>$20 Flask</th>
+        <th>$50 HTML</th>
+        <th>$50 Flask</th>
+      </tr>
+      <tr>
+        <td>AWS Account + IAM Credentials</td>
+        <td>✅</td><td>✅</td><td>✅</td><td>✅</td>
+      </tr>
+      <tr>
+        <td>GitHub Repo (Actions enabled)</td>
+        <td>✅</td><td>✅</td><td>✅</td><td>✅</td>
+      </tr>
+      <tr>
+        <td>Terraform Installed</td>
+        <td>❌</td><td>❌</td><td>✅ (pinned version)</td><td>✅ (pinned version)</td>
+      </tr>
+      <tr>
+        <td>Python 3.10+ (local optional)</td>
+        <td>N/A</td><td>✅</td><td>N/A</td><td>✅</td>
+      </tr>
+      <tr>
+        <td>Docker (for builds)</td>
+        <td>❌</td><td>❌</td><td>❌</td><td>✅</td>
+      </tr>
+    </table>
+  </details>
+
+  <details><summary>Can I customize it?</summary>
+    <p>Absolutely. You’re licensed to modify for your own projects: edit variables (region, instance type), add steps (linters/tests), swap AMIs, or extend the pipeline.</p>
+  </details>
+
+  <details><summary>What’s the support model?</summary>
+    <p>Community support only. If AWS/GitHub changes break a script, open a GitHub Issue with logs—we’ll patch.  
+    No 1:1 consulting or SLAs included.</p>
+  </details>
+
+  <details><summary>Refunds?</summary>
+    <p>We want you to succeed. If you can’t complete the Quickstart within 7 days and share relevant logs/errors, you qualify for a refund.  
+     <a href="#" data-modal-open="#refund-modal"> Read full Refund Policy →</a></p>
+    
+  </details>
+
+  <details><summary>How do I verify my download is authentic?</summary>
+    <p>Each ZIP includes <code>checksums.txt</code> (SHA-256). Compare against your file:</p>
+    <ul>
+      <li><strong>macOS/Linux:</strong> <code>shasum -a 256 file.zip</code></li>
+      <li><strong>Windows (PowerShell):</strong> <code>Get-FileHash file.zip -Algorithm SHA256</code></li>
+    </ul>
+  </details>
+
+  <details><summary>What does the license allow?</summary>
+    <p>You can use and modify internally for your projects/teams.  
+    Redistribution/resale is not permitted. See LICENSE.md for full terms.</p>
+  </details>
+
+  <p class="muted" style="margin-top:16px; font-size:0.9em;">
+    Want the full list? 👉 <a href="https://github.com/BigMangoTree/faq.md" target="_blank" rel="noopener">View all FAQs on GitHub</a>.
+  </p>
+</section>
+
+<!-- WHO WE ARE -->
+  <section id="who" class="alt-bg">
+    <h2>Who we are</h2>
+    <p>
+      We’re <strong>BigMangoTree</strong> — indie builders who love turning infrastructure headaches into clean, repeatable pipelines. 
+      We ship pragmatic tools that save time now and stay hackable later.
+    </p>
+
+    <ul>
+      <li>Focused on AWS + GitHub Actions for launch</li>
+      <li>Expanding to Azure, GCP, GitLab/Jenkins variants</li>
+      <li>Transparent docs, verified downloads, community support</li>
+    </ul>
+
+    <p class="muted" style="margin-top:12px">
+      Got ideas or feedback? We welcome suggestions — <a href="https://github.com/YOUR_REPO/feature-requests" target="_blank" rel="noopener">open a feature request</a>.
+    </p>
+  </section>
+
+  <!-- SUPPORT -->
+  <section id="support">
+    <h2>Support & Links</h2>
+    <p>
+      <a class="btn" href="https://github.com/your-org/your-repo/issues">Issues board</a>
+      <a class="btn" href="https://github.com/your-org/your-repo/issues/new/choose">New issue</a>
+      <a class="btn" href="https://github.com/your-org/your-repo">Docs on GitHub</a>
+    </p>
+    <p class="muted" style="font-size:14px">Community support only • Typical reply 24–48h (business days) • Email fallback: support@yourdomain.com</p>
+  </section>
+
+ <button id="scrollTopBtn" title="Go to top">↑</button>
+<footer>
+  <div style="margin-bottom:16px; text-align:center;">
+    <h3 style="margin:0; font-size:1.1em;">🚀 The CI/CD Fast-Track</h3>
+    <p style="margin:4px 0; font-size:0.95em; font-style:italic;">
+      From git push to AWS in minutes — No YAML wrestling. Ship today; polish later.
+    </p>
+  </div>
+
+  <p style="text-align:center; margin:16px 0;">
+    <a class="btn primary" href="#variants">See All 4 Turn-Key Solution Options</a>
+  </p>
+
+  <p class="muted" style="font-size:14px; margin:10px 0; text-align:center;">
+    <a href="#" id="open-privacy" style="text-decoration:underline">Privacy Policy</a>
+    &nbsp;•&nbsp; Not affiliated with AWS or GitHub
+  </p>
+
+  <p style="text-align:center; margin-top:10px;">
+    <small class="muted">© BigMangoTree</small>
+  </p>
+</footer>
+<!-- Privacy Policy Modal -->
+<div id="privacy-modal" class="modal-overlay" aria-hidden="true" role="dialog" aria-labelledby="privacy-title">
+  <div class="modal-dialog" role="document">
+    <button class="modal-close" data-modal-close aria-label="Close">✕</button>
+    <h3 id="privacy-title" style="margin-top:0">Privacy Policy</h3>
+    <div class="muted" style="font-size:14px;margin-bottom:12px">Effective: 20 Aug 2025</div>
+
+    <div class="modal-content">
+      <p>
+        This site (<strong>bigmangotree.github.io</strong>) is a static website with no backend or user accounts. 
+        We don’t collect personal details such as names, emails, or payment information here. 
+      </p>
+      <p>
+        We do use <strong>Google Analytics</strong> to measure general traffic patterns 
+        (for example: page views, referral sources, device/browser type). 
+        This helps us understand how the site is used and improve it over time. 
+      </p>
+      <p>
+        Data collected through Google Analytics is processed by Google and may include your IP address. 
+        We don’t sell or share this data with anyone else. 
+        You can learn more in 
+        <a href="https://policies.google.com/privacy" target="_blank" rel="noopener">Google’s Privacy Policy</a> 
+        or opt out via the 
+        <a href="https://tools.google.com/dlpage/gaoptout" target="_blank" rel="noopener">Google Analytics Opt-Out</a> tool. 
+      </p>
+      <p>
+        By using this site, you agree to this limited use of analytics. 
+      </p>
+
+      <p><strong>Payments & downloads.</strong> Purchases and file delivery are handled by <em>Gumroad</em>. Any information you provide at checkout is processed under <em>Gumroad’s</em> terms and privacy policy. We do not receive your full payment details.</p>
+
+      <p><strong>Support.</strong> If you open a ticket on <em>GitHub Issues</em>, your post (including any logs you share) is public on GitHub. If you email us, we only use your message to reply and provide support; we do not sell, rent, or share it with third parties.</p>
+
+      <p><strong>No resale of data.</strong> We do not sell or broker any personal information—ever.</p>
+
+      <p><strong>Future changes.</strong> If we add optional analytics or additional features later, we’ll update this policy and note the change date.</p>
+
+      <p class="muted" style="font-size:12px">
+        Questions? Contact: <a href="mailto:support@yourdomain.com">support@yourdomain.com</a>
+      </p>
+    </div>
+  </div>
+</div>
+<!-- Refund Policy Modal -->
+<div id="refund-modal" class="modal-overlay" aria-hidden="true" role="dialog" aria-labelledby="refund-title">
+  <div class="modal-dialog" role="document">
+    <button class="modal-close" data-modal-close aria-label="Close">✕</button>
+    <h3 id="refund-title" style="margin-top:0">Refund Policy</h3>
+    <div class="muted" style="font-size:14px;margin-bottom:12px">
+      Effective for all CI/CD Fast-Track products sold via Gumroad.
+    </div>
+
+    <div class="modal-content">
+      <p><strong>Window.</strong> Refunds are available within <strong>7 calendar days</strong> of purchase (based on the Gumroad receipt timestamp).</p>
+
+      <p><strong>Eligibility.</strong> Refunds apply only if you are <em>unable to complete the documented Quickstart</em> after following the steps as written and using supported platforms/versions.</p>
+
+      <p><strong>What to include.</strong> To request a refund, provide:
+      <ul>
+        <li>Gumroad <strong>order ID</strong> and purchaser email</li>
+        <li><strong>SKU/variant</strong> (e.g., $20 HTML / $50 Flask)</li>
+        <li><strong>Environment details</strong>: AWS region, Terraform version, GitHub runner OS</li>
+        <li>Link to the <strong>failing GitHub Actions run</strong> and relevant <strong>logs/screenshots</strong> (no secrets)</li>
+        <li><strong>Checksum verification</strong> confirming your ZIP matches <code>checksums.txt</code></li>
+      </ul>
+      </p>
+
+      <p><strong>Exclusions (not refundable).</strong>
+      <ul>
+        <li>Incorrect or missing AWS credentials/permissions, region quotas, or local/network restrictions</li>
+        <li>Deviations from the Quickstart (modified workflows/infra beyond documented variables)</li>
+        <li>Third-party outages or changes outside our control</li>
+        <li>Buyer’s remorse, cost concerns, or incompatibility with unsupported stacks</li>
+      </ul>
+      </p>
+
+      <p><strong>Process.</strong> Open a GitHub Issue or email support with the above details. We’ll respond within <strong>24–48 business hours</strong> to help diagnose. If we confirm a product defect preventing Quickstart completion, we will issue a full refund via Gumroad; otherwise we’ll provide guidance to resolve the issue. Final eligibility is determined at our discretion.</p>
+
+      <p><strong>After a refund.</strong> Your license is revoked for the refunded SKU; please delete all copies. One refund per customer per SKU.</p>
+
+      <p class="muted" style="font-size:12px">Note: Gumroad processes the refund to your original payment method once we approve it.</p>
+    </div>
+  </div>
+</div>
+<script>
+  (function () {
+    const ACTIVE_CLASS = 'is-open';
+    let lastTrigger = null;
+
+    function openModal(modal, trigger) {
+      if (!modal) return;
+      lastTrigger = trigger || null;
+      modal.setAttribute('aria-hidden', 'false');
+      modal.classList.add(ACTIVE_CLASS);
+
+      // Focus first close button for accessibility
+      const closeBtn = modal.querySelector('[data-modal-close], .modal-close');
+      if (closeBtn) closeBtn.focus();
+
+      document.addEventListener('keydown', onEsc);
+      modal.addEventListener('click', onBackdrop);
+    }
+
+    function closeModal(modal) {
+      if (!modal) return;
+      modal.setAttribute('aria-hidden', 'true');
+      modal.classList.remove(ACTIVE_CLASS);
+
+      document.removeEventListener('keydown', onEsc);
+      modal.removeEventListener('click', onBackdrop);
+
+      if (lastTrigger && typeof lastTrigger.focus === 'function') {
+        try { lastTrigger.focus(); } catch (e) {}
+      }
+      lastTrigger = null;
+    }
+
+    function onEsc(e) {
+      if (e.key === 'Escape') {
+        const open = document.querySelector('.modal-overlay[aria-hidden="false"]');
+        if (open) closeModal(open);
+      }
+    }
+
+    function onBackdrop(e) {
+      if (e.target.classList && e.target.classList.contains('modal-overlay')) {
+        closeModal(e.target);
+      }
+    }
+
+    // Generic open/close (event delegation)
+    document.addEventListener('click', function (e) {
+      const openEl = e.target.closest('[data-modal-open]');
+      if (openEl) {
+        e.preventDefault();
+        const selector = openEl.getAttribute('data-modal-open');
+        const modal = document.querySelector(selector);
+        openModal(modal, openEl);
+        return;
+      }
+
+      const closeEl = e.target.closest('[data-modal-close]');
+      if (closeEl) {
+        e.preventDefault();
+        const modal = e.target.closest('.modal-overlay');
+        if (modal) closeModal(modal);
+      }
+    });
+
+    // Backward-compat with your existing IDs
+    const legacyMap = [
+      { triggerId: 'open-privacy', modalSel: '#privacy-modal' },
+      { triggerId: 'open-refund-policy', modalSel: '#refund-modal' }
+    ];
+    legacyMap.forEach(({ triggerId, modalSel }) => {
+      const t = document.getElementById(triggerId);
+      if (t) {
+        t.addEventListener('click', function (ev) {
+          ev.preventDefault();
+          openModal(document.querySelector(modalSel), t);
+        });
+      }
+    });
+  })();
+</script>
+<script>
+  // Get the button
+  const scrollTopBtn = document.getElementById("scrollTopBtn");
+
+  // Show button when user scrolls down 200px
+  window.onscroll = function() {
+    if (document.body.scrollTop > 200 || document.documentElement.scrollTop > 200) {
+      scrollTopBtn.style.display = "block";
+    } else {
+      scrollTopBtn.style.display = "none";
+    }
+  };
+
+  // When user clicks, scroll smoothly to top
+  scrollTopBtn.onclick = function() {
+    window.scrollTo({ top: 0, behavior: 'smooth' });
+  };
+</script>
+</body>
+</html>

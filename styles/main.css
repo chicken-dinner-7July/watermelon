@@ -645,3 +645,11 @@ body {
     grid-template-columns: 1fr;
   }
 }
+
+.modal-dialog p {
+  margin: 10px 0 12px;
+}
+
+.modal-dialog ul {
+  margin: 6px 0 12px 18px;
+}
